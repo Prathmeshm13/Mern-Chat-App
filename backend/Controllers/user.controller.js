@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 
 export const getUsersforSideBar=async(req,res)=>{
     try {
-        const loggedinUsers=req.user._id;
+        const loggedinUsers=await req.user._id;
         const filteredUsers=await User.find({_id:{$ne:loggedinUsers}}).select("-password");
 
         res.status(200).json(filteredUsers);

@@ -1,6 +1,6 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs"
-import generateJWT from "../utils/generateToken.js";
+import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signupUser= async (req,res)=>{
     try {
@@ -26,7 +26,7 @@ export const signupUser= async (req,res)=>{
     })
     await newUser.save();
     if(newUser){
-    await generateJWT(newUser._id,res);
+    generateTokenAndSetCookie(newUser._id,res);
     res.status(201).json({
         _id:newUser._id,
         fullName:newUser.fullName,
@@ -48,11 +48,14 @@ export const loginUser= async(req,res)=>{
     try {
         const {username,password}=req.body;
         const user= await User.findOne({username});
+        if(!user){
+            return res.status(400).json({error:"Invalid Credentials"});
+        }
         const isPassCorrect= await bcrypt.compare(password,user.password||" ");
         if(!user || !isPassCorrect){
             return res.status(400).json({error:"Invalid Credentials"});
         }
-        generateJWT(user._id,res);
+        generateTokenAndSetCookie(user._id,res);
         res.status(201).json({
             _id:user._id,
             fullName:user.fullName,
