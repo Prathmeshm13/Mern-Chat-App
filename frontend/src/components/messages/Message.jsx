@@ -20,7 +20,7 @@ const Message = ({ message }) => {
 					alt='Tailwind CSS chat bubble component' />
 				</div>
 			</div>
-			<div className={`chat-bubble text-white pb-2 ${bubbleBgColor}`}>{message.message}</div>
+			<div className={`chat-bubble text-white pb-2 ${bubbleBgColor} ${shakeClass}`}>{message.message}</div>
 			<div className='chat-footer opacity-50 text-xs  text-white flex gap-1 items-center'>{formattedTime}</div>
 		</div>
 	);
