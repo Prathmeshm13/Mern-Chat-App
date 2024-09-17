@@ -6,7 +6,7 @@ const generateTokenAndSetCookie = async(userId, res) => {
     });
     await res.cookie("jwt", token, {
         maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days in milliseconds
-        httpOnly: true, // Helps prevent XSS attacks
+        httpOnly: false, // Helps prevent XSS attacks
         sameSite: 'none', // Required for cross-origin cookies
         secure: process.env.NODE_ENV!="development", // Cookies are only sent over HTTPS in production
     });
