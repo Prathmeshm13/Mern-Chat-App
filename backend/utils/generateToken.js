@@ -8,7 +8,7 @@ const generateTokenAndSetCookie = async(userId, res) => {
         maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days in milliseconds
         httpOnly: true, // Helps prevent XSS attacks
         sameSite: 'none', // Required for cross-origin cookies
-        secure: true, // Cookies are only sent over HTTPS in production
+        secure: process.env.NODE_ENV!="development", // Cookies are only sent over HTTPS in production
     });
 };
 
