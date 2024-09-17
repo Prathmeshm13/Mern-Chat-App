@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
     cors({
-      origin: "http://localhost:3000", // Your frontend URL
+      origin: "https://mern-chat-app-g3nc.onrender.com", // Your frontend URL
       credentials: true, // Allow credentials (cookies) to be sent
     })
 );
